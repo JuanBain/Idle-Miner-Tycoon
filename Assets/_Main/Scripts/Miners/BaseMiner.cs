@@ -54,6 +54,11 @@ public class BaseMiner : MonoBehaviour
     {
     }
 
+    protected virtual IEnumerator IEDeposit(int golCollected, float depositTime)
+    {
+        yield return null;
+    }
+
     public void RotateMiner(int direction)
     {
         if (direction == 1)

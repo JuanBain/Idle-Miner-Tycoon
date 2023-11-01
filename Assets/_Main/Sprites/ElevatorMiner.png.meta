@@ -168,115 +168,115 @@ TextureImporter:
     physicsShape: []
     bones:
     - name: Head
-      guid: 
+      guid: 9006a8d55f4c997439eeff3973939075
       position: {x: -148.11073, y: -29.194475, z: 5}
       rotation: {x: 0, y: 0, z: 0.9955649, w: -0.094078325}
       length: 257.81805
       parentId: 5
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278190335
     - name: Left_eye_container
-      guid: 
+      guid: 1c4bed12c4052f04a9ecec6c088d7948
       position: {x: -1.1666105, y: -159.35718, z: 6}
       rotation: {x: 0, y: 0, z: 0.0051020016, w: 0.999987}
       length: 45.733036
       parentId: 0
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278255615
     - name: Right_eye_container
-      guid: 
+      guid: ad0287b43d22e8045b7149e90f5a1e36
       position: {x: -11.432662, y: -228.18642, z: 6}
       rotation: {x: 0, y: 0, z: -0.050062034, w: 0.9987461}
       length: 46.664463
       parentId: 0
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278255360
     - name: Left_eye
-      guid: 
+      guid: cacfc77e5c76bed44a0915d60eafeaf9
       position: {x: 79.85063, y: -17.848053, z: 7}
       rotation: {x: 0, y: 0, z: -0.054026168, w: 0.99853957}
       length: 26.257545
       parentId: 1
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4294967040
     - name: Right_eye
-      guid: 
+      guid: f69e07c47b2d3db47b52e577420d1298
       position: {x: 85.951485, y: -10.590226, z: 7}
       rotation: {x: 0, y: 0, z: 0.14924332, w: 0.9888005}
       length: 22.37557
       parentId: 2
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4294901760
     - name: Body
-      guid: 
+      guid: fe27e5171d5421348893f7d3c827f522
       position: {x: 230.86102, y: 321.11597, z: 4}
       rotation: {x: 0, y: 0, z: -0.68683577, w: 0.72681266}
       length: 102.13533
       parentId: -1
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4294902015
     - name: right_arm
-      guid: 
+      guid: 7265d70974ce92a4ea08270078a738cb
       position: {x: -6.3064694, y: 143.92455, z: 2}
       rotation: {x: 0, y: 0, z: -0.0010258284, w: 0.9999995}
       length: 52.988716
       parentId: 5
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278223103
     - name: arm
-      guid: 
+      guid: 8a20d7f9aa06bd740af73df555e86bbe
       position: {x: 96.89564, y: 10.129658, z: 3}
       rotation: {x: 0, y: 0, z: 0.26360294, w: 0.9646313}
       length: 65.902336
       parentId: 6
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4278255488
     - name: Left_arm
-      guid: 
+      guid: 6f222052a9c56f745a5f0e00e33dfa68
       position: {x: -17.433306, y: -137.7631, z: 5}
       rotation: {x: 0, y: 0, z: -0.08350291, w: 0.9965075}
       length: 78.4016
       parentId: 5
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4286643968
     - name: left_leg
-      guid: 
+      guid: 7c4575991a94ab148969cfe074bc684c
       position: {x: 169.31342, y: -55.83374, z: 3}
       rotation: {x: 0, y: 0, z: -0.08866875, w: 0.9960612}
       length: 71.71263
       parentId: 5
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4294934528
     - name: right_leg
-      guid: 
+      guid: 5baf10381413d604ca3193e14efacf44
       position: {x: 163.80432, y: 34.0874, z: 3}
       rotation: {x: 0, y: 0, z: 0.09840587, w: 0.9951464}
       length: 53.665516
       parentId: 5
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4294901888
     - name: foot
-      guid: 
+      guid: d9e2f02d052d1794a8a3cd5150303da0
       position: {x: 90.5347, y: 0.37940007, z: 2}
       rotation: {x: 0, y: 0, z: 0.5510774, w: 0.8344541}
       length: 51.56361
       parentId: 10
       color:
         serializedVersion: 2
-        rgba: 0
+        rgba: 4286578943
     spriteID: 5e97eb03825dee720800000000000000
-    internalID: 0
+    internalID: 1537655665
     vertices:
     - {x: 203.956, y: 464.314}
     - {x: 231.251, y: 471.447}

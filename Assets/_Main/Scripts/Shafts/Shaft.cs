@@ -27,13 +27,20 @@ public class Shaft : MonoBehaviour
         CreateDeposit();
     }
 
-    private void CreateMiner()
+    public void CreateMiner()
     {
         ShaftMiner newMiner = Instantiate(minerPrefab, depositLocation.position, quaternion.identity);
         newMiner.CurrentShaft = this;
         newMiner.MoveMiner(miningLocation.position);
         newMiner.transform.SetParent(_minersContainer.transform);
         newMiner.name = minerPrefab.name;
+
+        if (_miners.Count > 0)
+        {
+            newMiner.CollectCapacity = _miners[0].CollectCapacity;
+            newMiner.CollectPerSecond = _miners[0].CollectPerSecond;
+            newMiner.MoveSpeed = _miners[0].MoveSpeed;
+        }
 
         _miners.Add(newMiner);
     }
