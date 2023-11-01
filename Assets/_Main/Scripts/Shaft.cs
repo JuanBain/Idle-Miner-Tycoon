@@ -14,11 +14,14 @@ public class Shaft : MonoBehaviour
     [SerializeField] private Transform shaftDepositPosition;
     public Transform MiningLocation => miningLocation;
     public Transform DepositLocation => depositLocation;
+    public List<ShaftMiner> Miners => _miners;
     public Deposit CurrentDeposit { get; set; }
     private GameObject _minersContainer;
+    private List<ShaftMiner> _miners;
 
     private void Start()
     {
+        _miners = new List<ShaftMiner>();
         _minersContainer = new GameObject("Miners");
         CreateMiner();
         CreateDeposit();
@@ -31,6 +34,8 @@ public class Shaft : MonoBehaviour
         newMiner.MoveMiner(miningLocation.position);
         newMiner.transform.SetParent(_minersContainer.transform);
         newMiner.name = minerPrefab.name;
+
+        _miners.Add(newMiner);
     }
 
     private void CreateDeposit()
