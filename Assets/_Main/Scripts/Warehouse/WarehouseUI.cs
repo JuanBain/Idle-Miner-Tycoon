@@ -1,0 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+
+public class WarehouseUI : MonoBehaviour
+{
+    [SerializeField] private TextMeshProUGUI globalGoldTMP;
+
+    private void Update()
+    {
+        globalGoldTMP.text = GoldManager.Instance.CurrentGold.ToString();
+    }
+}

@@ -19,7 +19,9 @@ public class Deposit : MonoBehaviour
 
     public int CollectGold(BaseMiner miner)
     {
-        int minerCapacity = miner.CollectCapacity - miner.CurrentGold;
+        int collectCapacity = miner.CollectCapacity;
+        int currentGold = miner.CurrentGold;
+        int minerCapacity = collectCapacity - currentGold;
         return EvaluateAmountToCollect(minerCapacity);
     }
 
