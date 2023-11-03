@@ -6,6 +6,8 @@ using UnityEngine;
 
 public class BaseMiner : MonoBehaviour
 {
+    public static Action<BaseMiner, float> OnLoading;
+
     [SerializeField] private float moveSpeed = 5f;
     [SerializeField] private int initialCollectCapacity = 200;
     [SerializeField] private float goldCollectPerSecond = 50f;

@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &721921457
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 721921458}
+  m_Layer: 0
+  m_Name: BarPosition
+  m_TagString: Untagged
+  m_Icon: {fileID: 7866945982896999795, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &721921458
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 721921457}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.129, y: 0.31, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6188728011552535278}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6188728010235876346
 GameObject:
   m_ObjectHideFlags: 0
@@ -475,6 +506,7 @@ GameObject:
   - component: {fileID: 6188728011552535272}
   - component: {fileID: 6188728011552535277}
   - component: {fileID: 6188728011552535276}
+  - component: {fileID: 1410107367}
   m_Layer: 0
   m_Name: WarehouseMiner
   m_TagString: Untagged
@@ -496,6 +528,7 @@ Transform:
   m_Children:
   - {fileID: 6188728011009442457}
   - {fileID: 6188728010957944719}
+  - {fileID: 721921458}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -623,6 +656,20 @@ MonoBehaviour:
   moveSpeed: 5
   initialCollectCapacity: 200
   goldCollectPerSecond: 50
+--- !u!114 &1410107367
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6188728011552535273}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: da5d18275cc29b347a01469d7b197943, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loadingBarPrefab: {fileID: 3077253502309804184, guid: 9a8c0d7faf767eb4cb27638923abb1bc, type: 3}
+  loadingBarPosition: {fileID: 721921458}
 --- !u!1 &6188728011579524222
 GameObject:
   m_ObjectHideFlags: 0
