@@ -607,6 +607,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5d18275cc29b347a01469d7b197943, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingBarPrefab: {fileID: 3077253502309804184, guid: 9a8c0d7faf767eb4cb27638923abb1bc, type: 3}
+  loadingBarPosition: {fileID: 1730044789}
 --- !u!1 &2434219461343051941
 GameObject:
   m_ObjectHideFlags: 0

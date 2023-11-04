@@ -13,6 +13,7 @@ public class GoldManager : Singleton<GoldManager>
 
     private void Start()
     {
+        PlayerPrefs.DeleteAll();
         LoadGold();
     }
 

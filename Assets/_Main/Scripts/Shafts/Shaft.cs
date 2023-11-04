@@ -16,6 +16,9 @@ public class Shaft : MonoBehaviour
     public Transform DepositLocation => depositLocation;
     public List<ShaftMiner> Miners => _miners;
     public Deposit CurrentDeposit { get; set; }
+
+    public int ShaftId { get; set; }
+
     private GameObject _minersContainer;
     private List<ShaftMiner> _miners;
 
