@@ -21,7 +21,7 @@ public class BaseUpgrade : MonoBehaviour
     public float MoveSpeedMultiplier => moveSpeedMultiplier;
     public float UpgradeCostMultiplier => upgradeCostMultiplier;
     public Elevator Elevator => _elevator;
-
+    public Warehouse Warehouse => _warehouse;
     protected Shaft _shaft;
     protected Elevator _elevator;
     protected Warehouse _warehouse;

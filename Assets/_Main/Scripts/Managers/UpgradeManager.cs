@@ -71,9 +71,19 @@ public class UpgradeManager : MonoBehaviour
     [SerializeField] private Sprite movementIcon;
     [SerializeField] private Sprite loadingIcon;
 
+    [Header("Warehouse Icon")] [Space] [SerializeField]
+    private Sprite warehouseMinerIcon;
+
+    [SerializeField] private Sprite transportersIcon;
+
+    [SerializeField] private Sprite transportationIcon;
+    [SerializeField] private Sprite warehouseLoadingIcon;
+    [SerializeField] private Sprite warehouseWalkingIcon;
+
     #endregion
 
     public int TimesToUpgrade { get; set; }
+    private Warehouse _currentWarehouse;
     private Shaft _selectedShaft;
     private BaseUpgrade _currentUpgrade;
 
@@ -96,6 +106,11 @@ public class UpgradeManager : MonoBehaviour
             if (_currentUpgrade is ElevatorUpgrade)
             {
                 UpdateElevatorPanel(_currentUpgrade);
+            }
+
+            if (_currentUpgrade is WarehouseUpgrade)
+            {
+                UpdateWarehousePanel(_currentUpgrade);
             }
         }
     }
@@ -283,6 +298,63 @@ public class UpgradeManager : MonoBehaviour
 
     #endregion
 
+    #region Update Warehouse Panel
+
+    private void UpdateWarehousePanel(BaseUpgrade upgrade)
+    {
+        panelTitle.text = $"Warehouse Level {upgrade.CurrentLevel}";
+
+        //Update Stats Icons
+        stats[3].SetActive(true);
+        panelIcon.sprite = warehouseMinerIcon;
+        stat1Icon.sprite = transportersIcon;
+        stat2Icon.sprite = transportationIcon;
+        stat3Icon.sprite = warehouseLoadingIcon;
+        stat4Icon.sprite = warehouseWalkingIcon;
+
+        //Update Stats Titles
+        stat1Title.text = "Transporters";
+        stat2Title.text = "Transportation";
+        stat3Title.text = "Loading Speed";
+        stat4Title.text = "Walk Speed";
+
+        currentStat1.text = $"{_currentWarehouse.Miners.Count}";
+        currentStat2.text = $"{_currentWarehouse.Miners[0].CollectCapacity}";
+        currentStat3.text = $"{_currentWarehouse.Miners[0].CollectPerSecond}";
+        currentStat4.text = $"{_currentWarehouse.Miners[0].MoveSpeed}";
+
+        //Update miners value Added
+        if ((upgrade.CurrentLevel + 1) % 10 == 0)
+        {
+            stat1Upgraded.text = $"+ 1";
+        }
+        else
+        {
+            stat1Upgraded.text = $"+ 0";
+        }
+
+        //Update Collect capacity added
+        int collectCapacity = _currentWarehouse.Miners[0].CollectCapacity;
+        float collectCapacityMultiplier = upgrade.CollectCapacityMultiplier;
+        int collectCapacityAdded = Mathf.Abs(collectCapacity - (collectCapacity * (int)collectCapacityMultiplier));
+        stat2Upgraded.text = $"+ {collectCapacityAdded}";
+
+        //Update Collect per second added
+        float currentLoadSpeed = _currentWarehouse.Miners[0].CollectPerSecond;
+        float currentLoadSpeedMultiplier = upgrade.CollectPerSecondMultiplier;
+        int loadSpeedAdded = (int)Mathf.Abs(currentLoadSpeed - (currentLoadSpeed * currentLoadSpeedMultiplier));
+        stat3Upgraded.text = $"+ {loadSpeedAdded}";
+
+        //Update Move Speed added
+        float currentWalkingSpeed = _currentWarehouse.Miners[0].MoveSpeed;
+        float currentWalkingSpeedMultiplier = upgrade.MoveSpeedMultiplier;
+        int walkingSpeedAdded =
+            (int)Mathf.Abs(currentWalkingSpeed - (currentWalkingSpeed * currentWalkingSpeedMultiplier));
+        stat4Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0 ? $"+ {walkingSpeedAdded}/s" : $"+ 0/s";
+    }
+
+    #endregion
+
     #region Events
 
     private void ShaftUpgradeRequest(Shaft shaft, ShaftUpgrade shaftUpgrade)
@@ -310,10 +382,19 @@ public class UpgradeManager : MonoBehaviour
         UpdateElevatorPanel(elevatorUpgrade);
     }
 
+    private void WarehouseUpgradeRequest(Warehouse warehouse, WarehouseUpgrade warehouseUpgrade)
+    {
+        _currentUpgrade = warehouseUpgrade;
+        _currentWarehouse = warehouse;
+        OpenUpgradePanel(true);
+        UpdateWarehousePanel(_currentUpgrade);
+    }
+
     private void OnEnable()
     {
         ShaftUI.OnUpgradeRequest += ShaftUpgradeRequest;
         ElevatorUI.OnUpgradeRequest += ElevatorUpgradeRequest;
+        WarehouseUI.OnUpgradeRequest += WarehouseUpgradeRequest;
     }
 
 
@@ -321,6 +402,7 @@ public class UpgradeManager : MonoBehaviour
     {
         ShaftUI.OnUpgradeRequest -= ShaftUpgradeRequest;
         ElevatorUI.OnUpgradeRequest -= ElevatorUpgradeRequest;
+        WarehouseUI.OnUpgradeRequest -= WarehouseUpgradeRequest;
     }
 
     #endregion

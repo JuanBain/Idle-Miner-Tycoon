@@ -3876,6 +3876,10 @@ MonoBehaviour:
   loadIcon: {fileID: 7576617242518483205, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
   movementIcon: {fileID: 3220665290143086019, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
   loadingIcon: {fileID: 3052315535316524931, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
+  transportersIcon: {fileID: 7374845061861626600, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
+  transportationIcon: {fileID: 184950751378207249, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
+  warehouseLoadingIcon: {fileID: 3434086634727231013, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
+  warehouseWalkingIcon: {fileID: -3397230575767399492, guid: 9d52fbfaea94ddf4fab176a8be2612dd, type: 3}
 --- !u!1 &1049227414
 GameObject:
   m_ObjectHideFlags: 0
@@ -7215,9 +7219,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1150682808}
-        m_TargetAssemblyTypeName: ElevatorUI, Assembly-CSharp
-        m_MethodName: 
+      - m_Target: {fileID: 1150682811}
+        m_TargetAssemblyTypeName: WarehouseUI, Assembly-CSharp
+        m_MethodName: UpgradeRequest
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
