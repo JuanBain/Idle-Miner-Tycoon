@@ -2,17 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WarehouseUpgrade : MonoBehaviour
+public class WarehouseUpgrade : BaseUpgrade
 {
-    // Start is called before the first frame update
-    void Start()
+    protected override void RunUpgrade()
     {
-        
-    }
+        if (CurrentLevel % 10 == 0)
+        {
+            _warehouse.AddMiner();
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        foreach (WarehouseMiner miner in _warehouse.Miners)
+        {
+            miner.CollectCapacity *= (int)collectCapacityMultiplier;
+            miner.CollectPerSecond *= collectPerSecondMultiplier;
+            if (CurrentLevel % 10 == 0)
+            {
+                miner.MoveSpeed *= moveSpeedMultiplier;
+            }
+        }
     }
 }
