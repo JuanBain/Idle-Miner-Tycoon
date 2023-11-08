@@ -13,6 +13,11 @@ public class ShaftUpgrade : BaseUpgrade
                 _shaft.CreateMiner();
             }
 
+            if (CurrentLevel == 10)
+            {
+                _shaft.CreateManager();
+            }
+
             foreach (ShaftMiner miner in _shaft.Miners)
             {
                 miner.CollectCapacity *= (int)collectCapacityMultiplier;

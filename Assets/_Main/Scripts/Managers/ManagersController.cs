@@ -53,6 +53,36 @@ public class ManagersController : Singleton<ManagersController>
         }
     }
 
+    #region Boosts
+
+    public void RunMovementBoost(BaseMiner miner, float duration, float value)
+    {
+        StartCoroutine(IEMovementBoost(miner, duration, value));
+    }
+
+    public void RunLoadingBoost(BaseMiner miner, float duration, float value)
+    {
+        StartCoroutine(IELoadingBoost(miner, duration, value));
+    }
+
+    private IEnumerator IEMovementBoost(BaseMiner miner, float duration, float value)
+    {
+        float startSpeed = miner.MoveSpeed;
+        miner.MoveSpeed *= value;
+        yield return new WaitForSeconds(duration);
+        miner.MoveSpeed = startSpeed;
+    }
+
+    private IEnumerator IELoadingBoost(BaseMiner miner, float duration, float value)
+    {
+        float startValue = miner.CollectPerSecond;
+        miner.CollectPerSecond *= value;
+        yield return new WaitForSeconds(duration);
+        miner.CollectPerSecond = startValue;
+    }
+
+    #endregion
+
     public void UnassignManager()
     {
         RestoreManagerCard(CurrentManagerLocation.Manager);
@@ -85,6 +115,7 @@ public class ManagersController : Singleton<ManagersController>
             managerLevel.text = managerLocation.Manager.ManagerLevel.ToString();
             boostEffect.text = managerLocation.Manager.boostDuration.ToString();
             boostDescription.text = managerLocation.Manager.boostDescription;
+            managerLocation.UpdateBoostIcon();
             assignedManagerPanel.SetActive(true);
         }
         else

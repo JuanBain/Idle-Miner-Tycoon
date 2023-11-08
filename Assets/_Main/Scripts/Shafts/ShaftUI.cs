@@ -22,7 +22,8 @@ public class ShaftUI : MonoBehaviour
 
     private void Update()
     {
-        currentGoldTMP.text = _shaft.CurrentDeposit.CurrentGold.ToString();
+       
+        currentGoldTMP.text = Currency.DisplauCurrency(_shaft.CurrentDeposit.CurrentGold);
     }
 
     public void BuyNewShaft()
@@ -37,7 +38,7 @@ public class ShaftUI : MonoBehaviour
 
     public void UpgradeRequest()
     {
-        OnUpgradeRequest?.Invoke(_shaft,_shaftUpgrade);
+        OnUpgradeRequest?.Invoke(_shaft, _shaftUpgrade);
     }
 
     private void UpgradeShaft(BaseUpgrade upgrade, int currentLevel)

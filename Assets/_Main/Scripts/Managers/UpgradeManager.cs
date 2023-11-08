@@ -118,6 +118,8 @@ public class UpgradeManager : MonoBehaviour
     public void OpenUpgradePanel(bool status)
     {
         upgradePanel.SetActive(status);
+        ActivateButton(0);
+        TimesToUpgrade = 1;
     }
 
     #region Upgrade Buttons
@@ -126,28 +128,28 @@ public class UpgradeManager : MonoBehaviour
     {
         ActivateButton(0);
         TimesToUpgrade = 1;
-        upgradeCost.text = $"{_currentUpgrade.UpgradeCost}";
+        upgradeCost.text = Currency.DisplauCurrency((int)_currentUpgrade.UpgradeCost);
     }
 
     public void UpgradeX10()
     {
         ActivateButton(1);
         TimesToUpgrade = CanUpgradeManyTimes(10, _currentUpgrade) ? 10 : 0;
-        upgradeCost.text = GetUpgradeCost(10, _currentUpgrade).ToString();
+        upgradeCost.text = Currency.DisplauCurrency(GetUpgradeCost(TimesToUpgrade, _currentUpgrade));
     }
 
     public void UpgradeX50()
     {
         ActivateButton(2);
         TimesToUpgrade = CanUpgradeManyTimes(50, _currentUpgrade) ? 50 : 0;
-        upgradeCost.text = GetUpgradeCost(50, _currentUpgrade).ToString();
+        upgradeCost.text = Currency.DisplauCurrency(GetUpgradeCost(TimesToUpgrade, _currentUpgrade));
     }
 
     public void UpgradeXMax()
     {
         ActivateButton(3);
         TimesToUpgrade = CalculateUpgradeCount(_currentUpgrade);
-        upgradeCost.text = GetUpgradeCost(TimesToUpgrade, _currentUpgrade).ToString();
+        upgradeCost.text = Currency.DisplauCurrency(GetUpgradeCost(TimesToUpgrade, _currentUpgrade));
     }
 
     #endregion
@@ -208,7 +210,7 @@ public class UpgradeManager : MonoBehaviour
     {
         ElevatorMiner miner = upgrade.Elevator.Miner;
         panelTitle.text = $"Elevator Level {upgrade.CurrentLevel}";
-
+        upgradeCost.text = Currency.DisplauCurrency((int)upgrade.UpgradeCost);
         //Update Icon Stats
         stats[3].SetActive(false);
         panelIcon.sprite = elevatorMinerIcon;
@@ -222,27 +224,29 @@ public class UpgradeManager : MonoBehaviour
         stat3Title.text = "Loading Speed";
 
         //Update Current Stats
-        currentStat1.text = $"{miner.CollectCapacity}";
-        currentStat1.text = $"{miner.MoveSpeed}";
-        currentStat1.text = $"{miner.CollectPerSecond}";
+        currentStat1.text = Currency.DisplauCurrency(miner.CollectCapacity);
+        currentStat1.text = Currency.DisplauCurrency((int)miner.MoveSpeed);
+        currentStat1.text = Currency.DisplauCurrency((int)miner.CollectPerSecond);
 
         //Update load value upgraded
         int currentCollect = miner.CollectCapacity;
         int collectMultiplier = (int)upgrade.CollectCapacityMultiplier;
         int load = Mathf.Abs(currentCollect - (currentCollect * collectMultiplier));
-        stat1Upgraded.text = $"+ {load}";
+        stat1Upgraded.text = "+" + Currency.DisplauCurrency(load);
 
         //Update move speed Upgraded
         float currentMoveSpeed = miner.MoveSpeed;
         float moveSpeedMultiplier = upgrade.MoveSpeedMultiplier;
         float moveSpeedAdded = Mathf.Abs(currentMoveSpeed - (currentMoveSpeed * moveSpeedMultiplier));
-        stat2Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0 ? $"+ {moveSpeedAdded}/s" : $"+ 0/s";
+        stat2Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0
+            ? stat1Upgraded.text = "+" + Currency.DisplauCurrency((int)moveSpeedAdded) + "/s"
+            : $"+ 0/s";
 
         //Update new loading speed Added
         float loadingSpeed = miner.CollectPerSecond;
         float loadingSpeedMultiplier = upgrade.CollectPerSecondMultiplier;
         float loadingAdded = Mathf.Abs(loadingSpeed - (loadingSpeed * loadingSpeedMultiplier));
-        stat3Upgraded.text = $"+ {loadingAdded}/s";
+        stat3Upgraded.text = "+" + Currency.DisplauCurrency((int)loadingAdded) + "/s";
     }
 
     #endregion
@@ -253,7 +257,7 @@ public class UpgradeManager : MonoBehaviour
     {
         panelTitle.text = $"Mine Shaft {_selectedShaft.ShaftId + 1} Level {upgrade.CurrentLevel}";
 
-        upgradeCost.text = $"{upgrade.UpgradeCost}";
+        upgradeCost.text = Currency.DisplauCurrency((int)upgrade.UpgradeCost);
         currentStat1.text = $"{_selectedShaft.Miners.Count}";
         currentStat2.text = $"{_selectedShaft.Miners[0].MoveSpeed}";
         currentStat3.text = $"{_selectedShaft.Miners[0].CollectPerSecond}";
@@ -278,19 +282,22 @@ public class UpgradeManager : MonoBehaviour
         float collectCapacityMultiplier = upgrade.CollectCapacityMultiplier;
         int collectCapacityAdded = Mathf.Abs(collectCapacity - (collectCapacity * (int)collectCapacityMultiplier));
         stat4Upgraded.text = $"+ {collectCapacityAdded}";
+        stat4Upgraded.text = "+" + Currency.DisplauCurrency(collectCapacity);
 
         //Upgrade Load Speed
         float currentLoadSpeed = _selectedShaft.Miners[0].CollectPerSecond;
         float currentLoadSpeedMultiplier = upgrade.CollectPerSecondMultiplier;
         int loadSpeedAdded = (int)Mathf.Abs(currentLoadSpeed - (currentLoadSpeed * currentLoadSpeedMultiplier));
-        stat3Upgraded.text = $"+ {loadSpeedAdded}";
+        stat3Upgraded.text = "+" + Currency.DisplauCurrency(loadSpeedAdded);
 
         //Upgrade Walking Speed
         float currentWalkingSpeed = _selectedShaft.Miners[0].MoveSpeed;
         float currentWalkingSpeedMultiplier = upgrade.MoveSpeedMultiplier;
         int walkingSpeedAdded =
             (int)Mathf.Abs(currentWalkingSpeed - (currentWalkingSpeed * currentWalkingSpeedMultiplier));
-        stat2Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0 ? $"+ {walkingSpeedAdded}/s" : $"+ 0/s";
+        stat2Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0
+            ? $"+ {Currency.DisplauCurrency(walkingSpeedAdded)}/s"
+            : $"+ 0/s";
 
         // Upgrade Miner Count
         stat1Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0 ? $"+ 1" : $"+ 0";
@@ -303,7 +310,7 @@ public class UpgradeManager : MonoBehaviour
     private void UpdateWarehousePanel(BaseUpgrade upgrade)
     {
         panelTitle.text = $"Warehouse Level {upgrade.CurrentLevel}";
-
+        upgradeCost.text = Currency.DisplauCurrency((int)upgrade.UpgradeCost);
         //Update Stats Icons
         stats[3].SetActive(true);
         panelIcon.sprite = warehouseMinerIcon;
@@ -337,20 +344,22 @@ public class UpgradeManager : MonoBehaviour
         int collectCapacity = _currentWarehouse.Miners[0].CollectCapacity;
         float collectCapacityMultiplier = upgrade.CollectCapacityMultiplier;
         int collectCapacityAdded = Mathf.Abs(collectCapacity - (collectCapacity * (int)collectCapacityMultiplier));
-        stat2Upgraded.text = $"+ {collectCapacityAdded}";
+        stat2Upgraded.text = $"+ {Currency.DisplauCurrency(collectCapacityAdded)}";
 
         //Update Collect per second added
         float currentLoadSpeed = _currentWarehouse.Miners[0].CollectPerSecond;
         float currentLoadSpeedMultiplier = upgrade.CollectPerSecondMultiplier;
         int loadSpeedAdded = (int)Mathf.Abs(currentLoadSpeed - (currentLoadSpeed * currentLoadSpeedMultiplier));
-        stat3Upgraded.text = $"+ {loadSpeedAdded}";
+        stat3Upgraded.text = $"+ {Currency.DisplauCurrency(loadSpeedAdded)}";
 
         //Update Move Speed added
         float currentWalkingSpeed = _currentWarehouse.Miners[0].MoveSpeed;
         float currentWalkingSpeedMultiplier = upgrade.MoveSpeedMultiplier;
         int walkingSpeedAdded =
             (int)Mathf.Abs(currentWalkingSpeed - (currentWalkingSpeed * currentWalkingSpeedMultiplier));
-        stat4Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0 ? $"+ {walkingSpeedAdded}/s" : $"+ 0/s";
+        stat4Upgraded.text = (upgrade.CurrentLevel + 1) % 10 == 0
+            ? $"+ {Currency.DisplauCurrency(walkingSpeedAdded)}/s"
+            : $"+ 0/s";
     }
 
     #endregion

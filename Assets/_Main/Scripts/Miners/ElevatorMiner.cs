@@ -8,12 +8,18 @@ public class ElevatorMiner : BaseMiner
     [SerializeField] private Elevator _elevator;
     private int _currentShaftIndex = -1;
     private Deposit _currentDeposit;
+    private bool startElevator = true;
+
+    private void Start()
+    {
+    }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.A))
+        if (startElevator && ShaftManager.Instance.Shafts[0].CurrentDeposit != null)
         {
             MoveToNextLocation();
+            startElevator = false;
         }
     }
 
@@ -99,5 +105,31 @@ public class ElevatorMiner : BaseMiner
         //Update goal and move to next location
         ChangeGoal();
         MoveToNextLocation();
+    }
+
+    private void ElevatorBoost(ElevatorManagerLocation elevatorManagerLocation)
+    {
+        switch (elevatorManagerLocation.Manager.BoostType)
+        {
+            case BoostType.Movement:
+                ManagersController.Instance.RunMovementBoost(this, elevatorManagerLocation.Manager.boostDuration,
+                    elevatorManagerLocation.Manager.boostValue);
+                break;
+            case BoostType.Loading:
+                ManagersController.Instance.RunLoadingBoost(this, elevatorManagerLocation.Manager.boostDuration,
+                    elevatorManagerLocation.Manager.boostValue);
+                break;
+        }
+    }
+
+    private void OnEnable()
+    {
+        ElevatorManagerLocation.OnBoost += ElevatorBoost;
+    }
+
+
+    private void OnDisable()
+    {
+        ElevatorManagerLocation.OnBoost -= ElevatorBoost;
     }
 }

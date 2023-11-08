@@ -16,17 +16,11 @@ public class WarehouseMiner : BaseMiner
     private void Start()
     {
         _loadBar = GetComponent<LoadBar>();
+        RotateMiner(-1);
+        _animator.SetBool(_walkingNoGold, true);
+        MoveMiner(new Vector2(ElevatorDepositLocation.position.x, transform.position.y));
     }
 
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            RotateMiner(-1);
-            _animator.SetBool(_walkingNoGold, true);
-            MoveMiner(new Vector2(ElevatorDepositLocation.position.x, transform.position.y));
-        }
-    }
 
     protected override void CollectGold()
     {

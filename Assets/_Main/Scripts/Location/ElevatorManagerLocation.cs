@@ -1,18 +1,14 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ElevatorManagerLocation : BaseManagerLocation
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public static Action<ElevatorManagerLocation> OnBoost;
 
-    // Update is called once per frame
-    void Update()
+    public override void RunBoost()
     {
-        
+        OnBoost?.Invoke(this);
     }
 }

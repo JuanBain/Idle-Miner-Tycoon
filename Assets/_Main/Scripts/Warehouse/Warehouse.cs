@@ -31,4 +31,38 @@ public class Warehouse : MonoBehaviour
         miner.WarehouseLocation = warehouseDepositLocation;
         _miners.Add(miner);
     }
+
+
+    private void WarehouseMinerBoost(WarehouseManagerLocation warehouseManagerLocation)
+    {
+        switch (warehouseManagerLocation.Manager.BoostType)
+        {
+            case BoostType.Movement:
+                foreach (WarehouseMiner miner in Miners)
+                {
+                    ManagersController.Instance.RunMovementBoost(miner, warehouseManagerLocation.Manager.boostDuration,
+                        warehouseManagerLocation.Manager.boostValue);
+                }
+
+                break;
+            case BoostType.Loading:
+                foreach (WarehouseMiner miner in Miners)
+                {
+                    ManagersController.Instance.RunLoadingBoost(miner, warehouseManagerLocation.Manager.boostDuration,
+                        warehouseManagerLocation.Manager.boostValue);
+                }
+
+                break;
+        }
+    }
+
+    private void OnEnable()
+    {
+        WarehouseManagerLocation.OnBoost += WarehouseMinerBoost;
+    }
+
+    private void OnDisable()
+    {
+        WarehouseManagerLocation.OnBoost -= WarehouseMinerBoost;
+    }
 }
